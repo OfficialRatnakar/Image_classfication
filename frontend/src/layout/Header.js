@@ -53,7 +53,7 @@ const Header = ({ onSidebarOpen }) => {
                     marginLeft: '10px',
                   }}
                 >
-                  Image Classification
+                 ImageIQ
                 </Typography>
               </IconButton>
             </Box>

@@ -52,7 +52,7 @@ const Sidebar = ({ open, onClose }) => {
                   textDecoration='none'
                   marginLeft='10px'
                 >
-                  Image Classification
+                  ImageIQ
                 </Typography>
               </IconButton>
             </Box>

@@ -76,7 +76,7 @@ const Footer = () => {
                         variant='body2'
                         color={theme.palette.text.secondary}
                       >
-                        Copyright &copy; {new Date().getFullYear()} EquiSence.
+                        Copyright &copy; {new Date().getFullYear()} ImageIQ.
                       </Typography>
                     }
                   />
