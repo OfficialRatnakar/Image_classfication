@@ -5,7 +5,7 @@ services:
     plan: free
     rootDir: .
     dockerfilePath: ./Dockerfile
-    healthCheckPath: /admin/
+    healthCheckPath: /health/
     numInstances: 1
     region: ohio
     envVars:

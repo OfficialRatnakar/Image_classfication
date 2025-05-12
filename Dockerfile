@@ -25,6 +25,7 @@ COPY . .
 
 # Environment variables for Django
 ENV PYTHONDONTWRITEBYTECODE=1
+# Force Python stdout and stderr streams to be unbuffered
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=config.settings
 # Use headless mode for TensorFlow

@@ -38,10 +38,22 @@ while not connection_successful and retry_count < max_retries:
 echo "Applying database migrations..."
 python manage.py migrate
 
+# Pre-load TensorFlow model in the background to avoid startup timeouts
+echo "Pre-loading TensorFlow model in the background..."
+(python -c "
+import tensorflow as tf
+import ssl
+# SSL certificate necessary for downloading weights
+ssl._create_default_https_context = ssl._create_unverified_context
+print('Loading InceptionResNetV2 model...')
+model = tf.keras.applications.InceptionResNetV2(weights='imagenet')
+print('TensorFlow model loaded successfully')
+" &)
+
 # Get the PORT environment variable or use 8000 as default
-PORT=${PORT:-8000}
+PORT=${PORT:-10000}
 echo "Port set to: $PORT"
 
 # Start the application
 echo "Starting the application on port $PORT..."
-gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --log-level debug 
+gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --log-level debug --timeout 120 --workers 1 
