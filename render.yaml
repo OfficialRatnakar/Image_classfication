@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: image-classification-backend
+    env: python
+    runtime: python3.9
+    plan: free
+    rootDir: .
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: cd backend && gunicorn config.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        sync: false # Allow manual setting on Dashboard
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false # Allow manual setting on Dashboard
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false # Allow manual setting on Dashboard
+      - key: DATABASE_URL
+        sync: false # This will be automatically set by the Postgres add-on
+    autoDeploy: true 
