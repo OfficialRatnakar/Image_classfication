@@ -1,9 +1,50 @@
-*.pyc
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Temp files
+tmp/
+temp/
+
+# Media files
+uploads/
+
+*.pyc
 .next/
 db.sqlite3
 media/
-node_modules/ 
-venv/
+node_modules/
 */migrations/*
 !*/migrations/__init__.py

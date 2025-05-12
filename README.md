@@ -1,147 +1,65 @@
-# Image Classification
+# Image Classification API
 
-This is an image classification app built using **Django 4**, **Django REST Framework 3**, **Next.js 12**, and **Material UI 5**. The app uses **Inception-ResNet-v2** to classify images selected by the user.
+This is a FastAPI application for image classification using the InceptionResNetV2 model. It's designed to be deployed on Hugging Face Spaces.
 
-## Table of Contents 
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running the application](#run-the-application)
-- [Customizing the application](#customize-the-application)
-- [Copyright and License](#copyright-and-license)
+## Features
 
+- Upload an image and get a classification result
+- Deployed as a Hugging Face Space
+- Built with FastAPI for high performance
+- Uses TensorFlow and InceptionResNetV2 pre-trained model
 
-## Prerequisites
+## API Endpoints
 
-Install the following prerequisites:
+- `GET /`: Root endpoint to check if the API is running
+- `GET /health/`: Health check endpoint
+- `POST /api/classifier/`: Upload an image for classification
 
-1. [Python 3.7-3.10](https://www.python.org/downloads/)
-<br>This project uses **TensorFlow v2.9.1**. For TensorFlow to work, you must install a correct version of Python on your machine. More information [here](https://www.tensorflow.org/install/source#tested_build_configurations).
-2. [Node.js](https://nodejs.org/en/)
-3. [Visual Studio Code](https://code.visualstudio.com/download)
+## How to Use
 
-## Installation
+1. Visit the Hugging Face Space URL
+2. Use the interactive Swagger UI at `/docs` to test the API
+3. Send a POST request to `/api/classifier/` with an image file
+4. Receive the classification result as JSON
 
-### Backend
+## Deploy Your Own
 
-#### 1. Create a virtual environment
+To deploy this on Hugging Face Spaces:
 
-From the **root** directory, run:
+1. Create a new Hugging Face Space
+2. Choose FastAPI as the SDK
+3. Upload these files to your Space
+4. The Space will automatically deploy
 
-```bash
-cd backend
-```
-
-```bash
-python -m venv venv
-```
-
-#### 2. Activate the virtual environment
-
-From the **backend** directory, run:
-
-On macOS:
+## Local Development
 
 ```bash
-source venv/bin/activate
-```
-
-On Windows:
-
-```bash
-venv\scripts\activate
-```
-
-#### 3. Install required backend dependencies
-
-From the **backend** directory, run:
-
-```bash
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the API locally
+uvicorn app:app --reload
 ```
 
-#### 4. Run migrations
+## Frontend Integration
 
-From the **backend** directory, run:
+Connect to this API from your frontend with:
 
-```bash
-python manage.py makemigrations
+```javascript
+const uploadImage = async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await fetch('https://your-huggingface-space-url.hf.space/api/classifier/', {
+    method: 'POST',
+    body: formData,
+  });
+
+  const data = await response.json();
+  return data;
+};
 ```
 
-```bash
-python manage.py migrate
-```
+## License
 
-### Frontend
-
-#### 1. Install required frontend dependencies
-
-From the **root** directory, run:
-
-```bash
-cd frontend
-```
-
-```bash
-npm install
-```
-
-## Run the application
-
-To run the application, you need to have both the backend and the frontend up and running.
-
-### 1. Run backend
-
-From the **backend** directory, run:
-
-```bash
-python manage.py runserver
-```
-
-### 2. Run frontend
-
-From the **frontend** directory, run:
-
-```bash
-npm run dev
-```
-
-## View the application
-
-Go to http://localhost:3000/ to view the application.
-
-## Customize the application
-
-This section describes how to customize the application. 
-
-### 1. Changing Colors
-
-To modify the colors in the application, make changes in the ```frontend/src/theme/theme.js``` file.
-
-### 2. Changing Fonts
-
-To modify the fonts in the application, first, add a new font to the ```frontend/src/pages/_document.js``` file, and then make changes in the ```frontend/src/theme/theme.js``` file.
-
-### 3. Changing Logo
-
-To modify the logo in the application, make changes in the ```frontend/src/layout/Header.js``` and ```frontend/src/layout/Sidebar.js``` files.
-
-### 4. Changing the Image in the Hero Section
-
-To modify the image in the Hero section, make changes in the ```frontend/src/components/Hero.js``` and ```frontend/src/layout/Footer.js``` files.
-
-### 5. Changing the Text in the Hero Section
-
-To modify the text in the Hero section, make changes in the ```frontend/src/components/Hero.js``` file.
-
-### 6. Changing Buttons in the Hero Section
-
-To modify the two buttons in the Hero section, make changes in the ```frontend/src/components/HeroButtons.js``` file.
-
-### 7. Changing the App Description
-
-To modify the app's description on the home page, make changes in the ```frontend/src/components/Description.js``` file.
-
-## Copyright and License
-
-Copyright © 2025 Bob's Vishal Ratnakar.
-"# Image_classfication" 
+MIT
