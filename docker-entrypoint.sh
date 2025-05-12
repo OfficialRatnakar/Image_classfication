@@ -4,6 +4,36 @@ set -e
 
 cd backend
 
+echo "Testing OpenCV installation..."
+python test_opencv.py
+
+echo "Checking database connection..."
+python -c "
+import sys
+import time
+import django
+from django.db import connections
+from django.db.utils import OperationalError
+
+django.setup()
+retry_count = 0
+max_retries = 5
+connection_successful = False
+
+while not connection_successful and retry_count < max_retries:
+    try:
+        connections['default'].ensure_connection()
+        connection_successful = True
+        print('Database connection successful')
+    except OperationalError:
+        retry_count += 1
+        print(f'Database connection attempt {retry_count} of {max_retries} failed')
+        if retry_count < max_retries:
+            time.sleep(5)
+        else:
+            sys.exit(1)
+"
+
 # Apply migrations
 echo "Applying database migrations..."
 python manage.py migrate

@@ -5,6 +5,8 @@ services:
     plan: free
     rootDir: .
     dockerfilePath: ./Dockerfile
+    healthCheckPath: /admin/
+    numInstances: 1
     envVars:
       - key: SECRET_KEY
         generateValue: true
@@ -18,4 +20,6 @@ services:
         sync: false # Allow manual setting on Dashboard
       - key: DATABASE_URL
         sync: false # This will be automatically set by the Postgres add-on
+      - key: PORT
+        value: 8000
     autoDeploy: true 

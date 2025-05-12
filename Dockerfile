@@ -2,23 +2,23 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies for OpenCV and other packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
+    ffmpeg \
+    libsm6 \
+    libxext6 \
+    libglib2.0-0 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements.txt file
-COPY backend/requirements.txt /tmp/requirements.txt
-
-# Clean up any potential BOM or special characters in the requirements file
-RUN sed -i 's/\r//g' /tmp/requirements.txt && \
-    tr -d '\uFEFF' < /tmp/requirements.txt > /tmp/clean_requirements.txt
+# Copy requirements.txt file 
+COPY requirements.txt .
 
 # Install pip dependencies
 RUN pip install --upgrade pip && \
-    pip install -r /tmp/clean_requirements.txt
+    pip install -r requirements.txt
 
 # Copy the rest of the application
 COPY . .
@@ -27,6 +27,11 @@ COPY . .
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=config.settings
+# Use headless mode for TensorFlow
+ENV PYTHONPATH=/app
+ENV TF_FORCE_GPU_ALLOW_GROWTH=true
+ENV TF_CPP_MIN_LOG_LEVEL=3
+ENV CUDA_VISIBLE_DEVICES=-1
 
 # Collect static files - run only during build
 RUN cd backend && python manage.py collectstatic --noinput
