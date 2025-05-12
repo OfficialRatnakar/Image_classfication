@@ -1,5 +1,0 @@
-*.py linguist-language=Python
-*.js linguist-language=JavaScript
-*.css linguist-language=CSS
-*.html linguist-language=HTML
-README.md linguist-documentation 

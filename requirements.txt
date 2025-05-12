@@ -1,8 +1,13 @@
-fastapi==0.95.0
-uvicorn==0.21.1
+Django==4.0.6
+djangorestframework==3.13.1
+django-cors-headers==3.13.0
+Pillow==9.2.0
+numpy==1.23.0
+# Use CPU-only version of TensorFlow
 tensorflow-cpu==2.12.0
-numpy==1.23.5
+# For compatibility with headless servers
 opencv-python-headless==4.6.0.66
-pillow==9.2.0
-python-multipart==0.0.6
-pydantic==1.10.7 
+whitenoise==6.9.0
+gunicorn==21.2.0
+dj-database-url==0.5.0
+psycopg2-binary==2.9.9 
