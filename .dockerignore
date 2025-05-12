@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# Frontend files (not needed for backend container)
+frontend/node_modules/
+frontend/.next/
+
+# Local development
+.env
+.env.local
+*.sqlite3
+
+# Media files (should be stored in persistent storage)
+backend/media/
+
+# Documentation
+docs/
+README.md
+LICENSE 
