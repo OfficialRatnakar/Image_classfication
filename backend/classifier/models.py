@@ -20,7 +20,7 @@ class Classifier(models.Model):
       ssl._create_default_https_context = ssl._create_unverified_context
 
       img = Image.open(self.image)
-      img_array = tf.keras.preprocessing.image.img_to_array(img)
+      img_array = tf.keras.utils.img_to_array(img)
       dimensions = (299, 299)
 
       # Interpolation - a method of constructing new data points within the range
