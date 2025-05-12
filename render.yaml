@@ -7,6 +7,7 @@ services:
     dockerfilePath: ./Dockerfile
     healthCheckPath: /admin/
     numInstances: 1
+    region: ohio
     envVars:
       - key: SECRET_KEY
         generateValue: true
@@ -21,5 +22,5 @@ services:
       - key: DATABASE_URL
         sync: false # This will be automatically set by the Postgres add-on
       - key: PORT
-        value: 8000
+        value: 10000
     autoDeploy: true 

@@ -32,6 +32,8 @@ ENV PYTHONPATH=/app
 ENV TF_FORCE_GPU_ALLOW_GROWTH=true
 ENV TF_CPP_MIN_LOG_LEVEL=3
 ENV CUDA_VISIBLE_DEVICES=-1
+# Set default port
+ENV PORT=10000
 
 # Collect static files - run only during build
 RUN cd backend && python manage.py collectstatic --noinput
@@ -40,8 +42,9 @@ RUN cd backend && python manage.py collectstatic --noinput
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-# Expose port
+# Expose ports
 EXPOSE 8000
+EXPOSE 10000
 
 # Start command
 ENTRYPOINT ["/docker-entrypoint.sh"] 

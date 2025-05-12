@@ -38,6 +38,10 @@ while not connection_successful and retry_count < max_retries:
 echo "Applying database migrations..."
 python manage.py migrate
 
+# Get the PORT environment variable or use 8000 as default
+PORT=${PORT:-8000}
+echo "Port set to: $PORT"
+
 # Start the application
-echo "Starting the application..."
-gunicorn config.wsgi:application --bind 0.0.0.0:$PORT 
+echo "Starting the application on port $PORT..."
+gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --log-level debug 
